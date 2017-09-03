@@ -14,10 +14,10 @@ let default_config = {
 	db:{
 		client    : 'mysql',
 		connection: {
-			host    : '127.0.0.1',
-			user    : 'root',
-			password: 'sailengsi26sql_',
-			database: 'sls_admin'
+			host    : 'db.sls.com',
+			user    : 'sls_express_mvc',
+			password: 'sls_express_mvc',
+			database: 'sls_express_mvc'
 		}
 	}
 };

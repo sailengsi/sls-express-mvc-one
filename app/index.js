@@ -8,6 +8,7 @@ module.exports = function(app) {
 
 	app.use(function(req,res,next) {
 		updateModelDatabase(config.common);
+		require('./schema');
 		next();
 	});
 
