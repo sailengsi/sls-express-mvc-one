@@ -1,23 +1,26 @@
 import config from './config.js';
 
+import {updateModelDatabase} from './common';
+
 module.exports = function(app) {
 	// console.log(app);
 	console.log('app index.js');
 
+	app.use(function(req,res,next) {
+		updateModelDatabase(config.common);
+		next();
+	});
+
 	require('./root/')(app, {
-		common: config.common,
 		config: config.root
 	});
 
 	require('./api/')(app, {
-		common: config.common,
 		config: config.api
 	});
 
 	require('./admin/')(app, {
-		common: config.common,
 		config: config.admin
 	});
-
 
 }
