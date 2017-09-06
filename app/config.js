@@ -1,17 +1,10 @@
-import root from './root/config';
-import admin from './admin/config.js';
-import api from './api/config.js';
-import web from './web/config.js';
-
-var _=require('lodash');
-
-let default_config = {
-	test    : 'test common config.js',
-	router  : {
-		namespace: '/'
+module.exports = {
+	router: {
+		namespace: '/api'
 	},
+
 	database: true,
-	db:{
+	db      : {
 		client    : 'mysql',
 		connection: {
 			host    : 'db.sls.com',
@@ -20,13 +13,4 @@ let default_config = {
 			database: 'sls_express_mvc'
 		}
 	}
-};
-
-
-module.exports = {
-	common: default_config,
-	root  : _.merge({}, default_config, root),
-	api   : _.merge({}, default_config, api),
-	admin : _.merge({}, default_config, admin),
-	web   : _.merge({}, default_config, web)
 };

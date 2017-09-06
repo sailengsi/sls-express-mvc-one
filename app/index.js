@@ -1,27 +1,17 @@
 import config from './config.js';
-
+import router from './router/';
 import {updateModelDatabase} from './common';
 
+import auth from './auth';
+
+global.model = {};
+
 module.exports = function(app) {
-	// console.log(app);
-	console.log('app index.js');
 
-	app.use(function(req,res,next) {
-		updateModelDatabase(config.common);
-		require('./schema');
-		next();
-	});
+	updateModelDatabase(config);
 
-	require('./root/')(app, {
-		config: config.root
-	});
+	app.use(auth);
 
-	require('./api/')(app, {
-		config: config.api
-	});
+	app.use(config.router.namespace, router);
 
-	require('./admin/')(app, {
-		config: config.admin
-	});
-
-}
+};
