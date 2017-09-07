@@ -1,26 +1,40 @@
 import ArticleModel from '../model/article';
 
 let Article = new ArticleModel({
-	tableName: 'demo_article'
+	tableName: 'article'
 });
 
 module.exports = {
-	getList: function(req, res, next) {
+	getList (req, res, next) {
 		Article.getList().then(data => {
-			/*res.send([{
-				id: 1,
-				name: 'sai'
-			}, {
-				id: 2,
-				name: 'leng'
-			}]);*/
-			// res.send(data);
-			res.send(data);
+			res.render('view/test/list-article', {
+				list: data
+			});
 		});
 	},
-	getView: function(req, res, next) {
+	getView (req, res, next) {
 		Article.getView({id: req.params.id}).then(data => {
 			res.send(data);
 		});
+	},
+	saveArticle (req, res, next) {
+		if (!req.body.title || !req.body.content) {
+			res.send({
+				status: 1,
+				msg   : '文章标题和内容不能为空'
+			});
+		} else {
+			Article.saveArticle(req.body).then(data => {
+				res.redirect('/api/article');
+			}).catch(err => {
+				res.send(err);
+			});
+		}
+	},
+	updateArticle (req, res, next) {
+
+	},
+	deleteArticle (req, res, next) {
+
 	}
 };

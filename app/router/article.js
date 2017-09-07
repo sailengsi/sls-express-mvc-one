@@ -1,6 +1,11 @@
 import article from '../controller/article.js';
 
 module.exports = function(router) {
-	router.get('/article', article.getList);
-	router.get('/article/:id', article.getView);
+	router.route('/article')
+		.get(article.getList)
+		.post(article.saveArticle)
+		.put(article.updateArticle);
+	router.route('/article/:id')
+		.get(article.getView)
+		.delete(article.deleteArticle);
 };
